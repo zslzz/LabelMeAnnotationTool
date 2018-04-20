@@ -4,7 +4,7 @@ var RUBBER_DRAWING = 3;
 var saveCanvas;
 var saveScribbleCanvas;
 var localop = false;
-//Module.TOTAL_MEMORY = 7108864;
+// Module.TOTAL_MEMORY = 7108864;
 grabCut = Module.cwrap(
     'grabCut', 'string', ['number', 'number', 'number', 'number', 'number']
 );
@@ -367,6 +367,7 @@ function Scribble_canvas(tag) {
     var imratio = main_media.GetImRatio();
     var scribbleData = scribble_canvas.cropandResize(poslx*imratio,posly*imratio,scale/imratio,fwidth*scale,fheight*scale,scribble_canvas.scribblecanvas);
     var origIm = new Image();
+    origIm.crossOrigin = "Anonymous";
     origIm.src = main_media.GetFileInfo().GetImagePath();
     origIm.poslx = poslx;
     origIm.posly = posly;
@@ -569,6 +570,7 @@ function Scribble_canvas(tag) {
     if (!saveScribbleCanvas) saveScribbleCanvas = document.createElement('canvas');
     var func = function (url){
       var imgdata = new Image();
+      imgdata.crossOrigin = "Anonymous";
       imgdata.src = scribble_canvas.scribblecanvas.toDataURL("image/png");
       imgdata.onload = function(){
         saveScribbleCanvas.setAttribute('width', main_media.width_orig);
@@ -736,6 +738,7 @@ function EditBubbleEditScribble(){
   main_media.ScrollbarsOn();
   scribble_canvas.annotationid = anno.GetAnnoID();
   scribble_canvas.scribble_image = new Image();
+  scribble_canvas.scribble_image.crossOrigin = "Anonymous";
   scribble_canvas.scribble_image.src = "Scribbles/"+main_media.GetFileInfo().GetDirName()+"/"+anno.scribble.GetScribbleName()+"?t="+Math.random();
   scribble_canvas.setCurrentDraw(OBJECT_DRAWING);
   scribble_canvas.editborderrx = anno.scribble.GetCornerRX(); 

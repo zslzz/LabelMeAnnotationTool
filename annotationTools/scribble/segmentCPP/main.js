@@ -23,6 +23,7 @@ $(document).ready(function() {
 
 function drawImageToCanvas(url) {
     var img = new Image();
+    img.crossOrigin = "Anonymous";
     img.src = url;
     img.onload = function() {
         resizeCanvas(img)

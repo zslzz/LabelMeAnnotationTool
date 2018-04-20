@@ -50,7 +50,7 @@ function StartDrawEvent(event) {
   
   // Draw polyline:
   draw_anno.SetDivAttach('draw_canvas');
-  draw_anno.DrawPolyLine(draw_x, draw_y);
+  draw_anno.DrawPolyLine(draw_x, draw_y);//绘制点
  
   // Set mousedown action to handle when user clicks on the drawing canvas:
   $('#draw_canvas_div').unbind();
@@ -129,7 +129,7 @@ function DrawCanvasMouseDown(event) {
   draw_anno.line_ids.push(DrawLineSegment(draw_anno.div_attach,draw_x[n-1],draw_y[n-1],draw_x[n],draw_y[n],'stroke="#0000ff" stroke-width="4"',scale));
 
   // Set cursor to be crosshair on line segment:
-  $('#'+draw_anno.line_ids[line_idx]).css('cursor','crosshair');
+  // $('#'+draw_anno.line_ids[line_idx]).css('cursor','crosshair');
   
   // Move the first control point to be on top of any drawn lines.
   $('#'+draw_anno.div_attach).append($('#'+draw_anno.point_id));

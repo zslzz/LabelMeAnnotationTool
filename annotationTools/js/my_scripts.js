@@ -56,13 +56,13 @@ function WriteLogMsg(msg) {
   if (window.XMLHttpRequest) {
     req_submit = new XMLHttpRequest();
     req_submit.open("POST", url, true);
-    req_submit.send(msg);
+    // req_submit.send(msg);
   } 
   else if (window.ActiveXObject) {
     req_submit = new ActiveXObject("Microsoft.XMLHTTP");
     if (req_submit) {
       req_submit.open("POST", url, true);
-      req_submit.send(msg);
+      // req_submit.send(msg);
     }
   }
 }
@@ -166,13 +166,13 @@ function GetTimeStamp() {
   if (window.XMLHttpRequest) {
     req_anno = new XMLHttpRequest();
     req_anno.open("POST", url, false);
-    req_anno.send();
+    // req_anno.send();
   } 
   else if (window.ActiveXObject) {
     req_anno = new ActiveXObject("Microsoft.XMLHTTP");
     if (req_anno) {
       req_anno.open("POST", url, false);
-      req_anno.send();
+      // req_anno.send();
     }
   }
 
@@ -334,14 +334,14 @@ function GetXMLFile() {
     req_submit = new XMLHttpRequest();
     req_submit.onreadystatechange = CheckXMLExists;
     req_submit.open("GET", xml_url, true);
-    req_submit.send('');
+    // req_submit.send('');
   } 
   else if (window.ActiveXObject) {
     req_submit = new ActiveXObject("Microsoft.XMLHTTP");
     if (req_submit) {
       req_submit.onreadystatechange = CheckXMLExists;
       req_submit.open("GET", xml_url, true);
-      req_submit.send('');
+      // req_submit.send('');
     }
   }
 }

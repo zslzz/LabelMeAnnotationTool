@@ -1,6 +1,8 @@
 /** @file Contains the global variables used in LabelMe. */
 
 // Parsed LabelMe XML file. Manipulate this variable with jquery.
+var ex_data = new exdatadto()//传出数据
+var im_data = new imdatadto()//导入数据
 var LM_xml;
 
 // URL of CGI script to submit XML annotation:
@@ -17,7 +19,7 @@ var use_attributes = 1; // if this is 0, then it will remove all the attributes 
 var use_parts = 1; // if this is 0 disapears the message from the bubble
 
 // for now, let's remove the attributes in MT mode. Just in case anybody is trying this.
-if (getQueryVariable('mode')=='mt'){
+if (getQueryVariable('mode') == 'mt') {
     //use_attributes=0;
     //use_parts = 0;
 }
