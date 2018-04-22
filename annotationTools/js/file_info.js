@@ -33,7 +33,7 @@ function file_info() {
      * URL has collection, directory, and filename information.
      */
     this.ParseURL = function () {
-        var labelme_url = document.URL;
+        var labelme_url = "http://localhost:9999/tool.html?collection=LabelMe&mode=f&folder=//05june05_static_indoor&image=p1010843.jpg";
         var idx = labelme_url.indexOf('?');
         if ((idx != -1) && (this.page_in_use == 0)) {
             this.page_in_use = 1;
@@ -332,17 +332,18 @@ function file_info() {
         var extra_field = '';
         if (username != 'anonymous') extra_field = '&username=' + username;
 
-        if (this.mode == 'i') window.location = url + '?collection=' + this.collection + '&mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
-        else if (this.mode == 'im') window.location = url + '?collection=' + this.collection + '&mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
-        else if (this.mode == 'mt') window.location = url + '?collection=' + this.collection + '&mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
-        else if (this.mode == 'c') window.location = url + '?mode=' + this.mode + '&username=' + username + '&collection=' + this.collection + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
-        else if (this.mode == 'f') window.location = url + '?mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
+        // if (this.mode == 'i') window.location = url + '?collection=' + this.collection + '&mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
+        // else if (this.mode == 'im') window.location = url + '?collection=' + this.collection + '&mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
+        // else if (this.mode == 'mt') window.location = url + '?collection=' + this.collection + '&mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
+        // else if (this.mode == 'c') window.location = url + '?mode=' + this.mode + '&username=' + username + '&collection=' + this.collection + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
+        // else if (this.mode == 'f') window.location = url + '?mode=' + this.mode + '&folder=' + this.dir_name + '&image=' + this.im_name + extra_field;
         return false;
     };
 
     /** Fetch next image. */
     this.FetchImage = function () {
         var url = 'annotationTools/perl/fetch_image.cgi?mode=' + this.mode + '&username=' + username + '&collection=' + this.collection.toLowerCase() + '&folder=' + this.dir_name + '&image=' + this.im_name;
+
         var im_req;
         // branch for native XMLHttpRequest object
         if (window.XMLHttpRequest) {
@@ -357,11 +358,11 @@ function file_info() {
                 im_req.send('');
             }
         }
-        if (im_req.status == 200) {
-            this.dir_name = im_req.responseXML.getElementsByTagName("dir")[0].firstChild.nodeValue;
-            this.im_name = im_req.responseXML.getElementsByTagName("file")[0].firstChild.nodeValue;
-            imgName = this.im_name;
-        }
+        // if (im_req.status == 200) {
+        //     this.dir_name = im_req.responseXML.getElementsByTagName("dir")[0].firstChild.nodeValue;
+        //     this.im_name = im_req.responseXML.getElementsByTagName("file")[0].firstChild.nodeValue;
+        //     imgName = this.im_name;
+        // }
         else {
             alert('Fatal: there are problems with fetch_image.cgi');
         }
