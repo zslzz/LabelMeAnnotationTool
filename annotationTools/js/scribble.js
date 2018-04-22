@@ -140,11 +140,12 @@ function Scribble_canvas(tag) {
  
   // Saves the resized scribbles into the server to create the segmentation
   this.save = function (dataURL, imname, dir, callback){
+    // TODO 将所绘制的文件以xml的形式存储
     $.ajax({
       async: true,
       type: "POST",
       url: "annotationTools/php/saveimage.php",
-      data: { 
+      data: {
         image: dataURL,
         name: imname,
         uploadDir: dir,
@@ -157,16 +158,16 @@ function Scribble_canvas(tag) {
 
   // General function to synchronously create a directory from a given url
   this.createDir = function(url, callback){
-    $.ajax({
-      async: true,
-      type: "POST",
-      url: "annotationTools/php/createdir.php",
-      data: { 
-    urlData: url
-      }
-    }).done(function(o) {
-      callback;
-    });
+    // $.ajax({
+    //   async: true,
+    //   type: "POST",
+    //   url: "annotationTools/php/createdir.php",
+    //   data: {
+    // urlData: url
+    //   }
+    // }).done(function(o) {
+    //   callback;
+    // });
   };
 
 
@@ -584,8 +585,6 @@ function Scribble_canvas(tag) {
         scribble_canvas.save(scribbledataURL, imagname+'_scribble_'+Nobj+'.png', url, null);
       }
     }
-    this.createDir("Scribbles/"+collectionName+"/", func("Scribbles/"+collectionName+"/"));
-    
   }
   this.saveMask = function (){
     var collectionName = main_media.GetFileInfo().GetDirName().replace("///","/");
@@ -599,8 +598,8 @@ function Scribble_canvas(tag) {
       var name = imagname+'_mask_'+Nobj+'.png';
       scribble_canvas.save(saveCanvas.toDataURL("image/png"),name, url, null);
     } 
-    scribble_canvas.createDir("annotationCache/TmpAnnotations/"+collectionName+"/", func1("annotationCache/TmpAnnotations/"+collectionName+"/", scribble_canvas.annotationid));
-    scribble_canvas.createDir("Masks/"+collectionName+"/", func1("Masks/"+collectionName+"/", scribble_canvas.annotationid));
+    // scribble_canvas.createDir("annotationCache/TmpAnnotations/"+collectionName+"/", func1("annotationCache/TmpAnnotations/"+collectionName+"/", scribble_canvas.annotationid));
+    // scribble_canvas.createDir("Masks/"+collectionName+"/", func1("Masks/"+collectionName+"/", scribble_canvas.annotationid));
   }
   
 
