@@ -1,12 +1,11 @@
 /** @file Contains the global variables used in LabelMe. */
 
 // Parsed LabelMe XML file. Manipulate this variable with jquery.
-// var ex_data = new exdatadto()//传出数据
-// var im_data = new imdatadto()//导入数据
-var task_img_urls;//获取项目图片数据
-var current_i=0;//当前图片
-var bankendserver='';//后台地址
-var img_server="http://p7kmwtlbj.bkt.clouddn.com/";//图片地址
+var task_list;//tasklist
+var current_i = 0;//当前任务
+var project_id;
+var user_id;
+var is_last = false;//是否是最后一个
 var LM_xml;
 
 // URL of CGI script to submit XML annotation:

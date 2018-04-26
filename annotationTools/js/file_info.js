@@ -286,9 +286,7 @@ function file_info() {
         // this.project_id = getUrlParam("project_id");
         // this.task_id=getUrlParam("task_id");
         // this.timestamp=getUrlParam("1234567");
-        // this.img_url="http://p7kmwtlbj.bkt.clouddn.com/"+"project_"+this.project_id+"_task_"+this.task_id+"_"+this.timestamp+".jpg";
-        // this.img_url="http://p7kmwtlbj.bkt.clouddn.com/"+"project_1_task_1_1234567.jpg";
-        this.img_url=img_server+task_img_urls[current_i]
+        this.img_url=task_list[current_i]['info']['img_url'];
         return this.img_url
         // if ((this.mode == 'i') || (this.mode == 'c') || (this.mode == 'f') || (this.mode == 'im') || (this.mode == 'mt')) return 'Images/' + this.dir_name + '/' + this.im_name;
     };

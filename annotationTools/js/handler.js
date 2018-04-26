@@ -263,11 +263,11 @@ function handler() {
         }
         else {
             nn = RemoveSpecialChars(document.getElementById('objEnter').value);
-            var re = /[a-zA-Z0-9]/;
-            if (!re.test(nn)) {
-                alert('Please enter an object name');
-                return;
-            }
+            // var re = /[a-zA-Z0-9]/;
+            // if (!re.test(nn)) {
+            //     alert('Please enter an object name');
+            //     return;
+            // }
             anno = this.QueryToRest();
         }
 

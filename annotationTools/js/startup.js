@@ -2,15 +2,12 @@
 
 /** Main entry point for the annotation tool. */
 
-function StartupLabelMe() {
+function StartupLabelMe()
+{
     console.time('startup');
     // Check browser:
-    // window.localStorage.setItem("asd", "hello my world");
-    // window.localStorage.setItem('myCat', 'Tom');
-    var cat = window.localStorage.getItem("asd");
-    console.log(cat)
     GetBrowserInfo();
-
+    getInfoFromUrl();//从url中获取projectid和userid
     if (IsNetscape() || (IsMicrosoft() && (bversion >= 4.5)) || IsSafari() || IsChrome()) {
 
         if (IsNetscape()) {
@@ -31,8 +28,7 @@ function StartupLabelMe() {
         // annotation folder or image filename.  If false is returned, the
         // function fetches a new image and sets the URL to reflect the
         // fetched image.
-        gettask()
-        getInfoFromUrl();//从url中获取信息
+        getTask()
         if (!main_media.GetFileInfo().ParseURL()) return;
         if (video_mode) {
             $('#generic_buttons').remove();
@@ -79,15 +75,37 @@ function StartupLabelMe() {
     }
 }
 
-function getInfoFromUrl() {
-    var taskarray = document.URL
-    var num1 = taskarray.indexOf("[");
-    var num2 = taskarray.indexOf("]");
-    task_img_urls = taskarray.substring(num1 + 1, num2).split(",");
+// function getInfoFromUrl() {
+//     var taskarray = document.URL
+//     var num1 = taskarray.indexOf("[");
+//     var num2 = taskarray.indexOf("]");
+//     task_img_urls = taskarray.substring(num1 + 1, num2).split(",");
+//
+//     console.log("get imgurls")
+// }
+function getInfoFromUrl(){
+    //从url获取并设置project_id,user_id,user_name
+     function getUrlParam(location,name) {
+        var url = location;
+        var splitIndex = url.indexOf("?") + 1;
+        var paramStr = url.substr(splitIndex, url.length);
 
-    console.log("get imgurls")
+        var arr = paramStr.split('&');
+        for (var i = 0; i < arr.length; i++) {
+            var kv = arr[i].split('=');
+            if (kv[0] == name) {
+                return kv[1];
+            }
+        }
+        return "";
+    }
+    var url = document.location.href;
+    project_id=getUrlParam(url,'project_id');
+    user_id=getUrlParam(url,'user_id');
+    username=getUrlParam(url,'user_name');
+    // var indexq = url.indexOf("?");
+    // window.location=url.substring(0,indexq);
 }
-
 function LoadNewMedia() {
 
     main_canvas = new canvas('myCanvas_bg');
@@ -118,7 +136,7 @@ function LoadAnnotationSuccess(xml) {
     // Set global variable:
     LM_xml = xml;
 
-    // Set AllAnnotations array:
+    // Set AllAnnotations array:设置标注的图像
     SetAllAnnotationsArray();
 
     console.time('attach main_canvas');

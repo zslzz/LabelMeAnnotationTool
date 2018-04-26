@@ -245,8 +245,16 @@ function drop(event, object_id) {
     }
 }
 
+/***
+ * 提交所有画框
+ */
 function submit_all_answer() {
-    WriteXML(SubmitXmlUrl, LM_xml, function () {
+    addtaskrun(SubmitXmlUrl, LM_xml, function () {
         return;
     });
+    if (current_i < task_list.length && !is_last) {
+        ShowNextImage()
+    } else {
+        is_last = true;
+    }
 }
