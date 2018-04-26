@@ -4,7 +4,8 @@
  * */
 
 function imdatadto() {
-    this.img_url = 'http://oyxrsomzz.bkt.clouddn.com/15.jpg';
+    // this.img_url = 'http://oyxrsomzz.bkt.clouddn.com/15.jpg';
+    this.img_url=null;
     this.img_info = null;
     this.GetImgUrl = function () {
         return this.img_url;

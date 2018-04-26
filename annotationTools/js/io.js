@@ -1,5 +1,48 @@
 /** @file Input/output functions for writing annotation files to the LabelMe server. */
+//http://localhost:9997/tool.html?imgurls=[project_1_task_5_456789.jpg,project_1_task_4_6789123.jpg,project_1_task_3_7654321.jpg]&user_name=luffy
+//http://labelme2.csail.mit.edu/Release3.0/tool.html?collection=LabelMe&mode=f&folder=//05june05_static_indoor&image=p1010843.jpg&username=
+//http://localhost:9997/tool.html?imgurls=[project_1_task_5_456789.jpg,project_1_task_4_6789123.jpg,project_1_task_3_7654321.jpg]&user_name=luffy
+/***
+ * 提交审核答案格式
+ * https://server.startask.net/taskrun/addauditrun
+ * {
+    "task_id": 2,
+    "taskrun_id": 6,
+    "project_id": 1,
+    "user_id": 2,
+    "info": {
+        "answer": true,
+        "unpassed": [
+            "条件一",
+            "条件二",
+            "条件三",
+            "条件四",
+            "条件五",
+            "条件六"
+        ]
+    }
+}
 
+ */
+function gettask() {
+    var request_url="https://server.startask.net/task/tasks_todo";
+    var datajson ="{\"project_id\":28,\"user_id\":2}"
+    $.ajax({
+    type: "POST",
+    url: request_url,
+    data: datajson,
+    contentType: "application/json",
+    dataType: "text",
+    success: printconsole,
+    error: function(xhr,ajaxOptions,thrownError) {
+      console.log(xhr.status);
+      console.log(thrownError);
+    }
+    });
+}
+function printconsole(re){
+    console.log(re)
+}
 function ReadXML(xml_file, SuccessFunction, ErrorFunction) {
     /***
      *

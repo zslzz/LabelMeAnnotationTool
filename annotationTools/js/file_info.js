@@ -23,7 +23,11 @@ function file_info() {
     this.assignmentId = null;
     this.workerId = null;
     this.mt_instructions = null;
-    this.img_url =null
+    this.project_id=null;
+    this.task_id=null;
+    this.task_ids=null
+    this.timestamp =null;
+    this.img_url =null;
     // *******************************************
     // Public methods:
     // *******************************************
@@ -33,6 +37,7 @@ function file_info() {
      * URL has collection, directory, and filename information.
      */
     this.ParseURL = function () {
+
         var labelme_url = "http://localhost:9999/tool.html?collection=LabelMe&mode=f&folder=//05june05_static_indoor&image=p1010843.jpg";
         var idx = labelme_url.indexOf('?');
         if ((idx != -1) && (this.page_in_use == 0)) {
@@ -277,8 +282,13 @@ function file_info() {
 
     /** Gets image path */
     this.GetImagePath = function () {
-        console.time('获取图片url')
-        this.img_url = im_data.GetImgUrl()
+        console.time('获取图片url');
+        // this.project_id = getUrlParam("project_id");
+        // this.task_id=getUrlParam("task_id");
+        // this.timestamp=getUrlParam("1234567");
+        // this.img_url="http://p7kmwtlbj.bkt.clouddn.com/"+"project_"+this.project_id+"_task_"+this.task_id+"_"+this.timestamp+".jpg";
+        // this.img_url="http://p7kmwtlbj.bkt.clouddn.com/"+"project_1_task_1_1234567.jpg";
+        this.img_url=img_server+task_img_urls[current_i]
         return this.img_url
         // if ((this.mode == 'i') || (this.mode == 'c') || (this.mode == 'f') || (this.mode == 'im') || (this.mode == 'mt')) return 'Images/' + this.dir_name + '/' + this.im_name;
     };
@@ -396,12 +406,12 @@ function file_info() {
     };
     this.PreFetchImage = function () {
         // var url = 'annotationTools/perl/fetch_image.cgi?mode=' + this.mode + '&username=' + username + '&collection=' + this.collection.toLowerCase() + '&folder=' + this.dir_name + '&image=' + this.im_name;
-        var url = im_data.GetImgUrl()
+        var url = this.img_url
         var im_req;
         // branch for native XMLHttpRequest object
         if (window.XMLHttpRequest) {
             im_req = new XMLHttpRequest();
-            im_req.open("GET", url, true);
+            // im_req.open("GET", url, true);
         }
         else if (window.ActiveXObject) {
             im_req = new ActiveXObject("Microsoft.XMLHTTP");
@@ -427,6 +437,6 @@ function file_info() {
                 alert('Fatal: there are problems with fetch_image.cgi');
             }
         }
-        im_req.send('');
+        // im_req.send('');
     };
 }

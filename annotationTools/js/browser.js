@@ -10,70 +10,78 @@ function GetBrowserInfo() {
 //   alert(navigator.cookieEnabled);
 //   alert(navigator.platform);
 //   alert(navigator.userAgent);
-  WriteLogMsg('*Browser_Information ' + navigator.userAgent);
+    WriteLogMsg('*Browser_Information ' + navigator.userAgent);
 
-  bname = navigator.appName;
-  if(IsMicrosoft()) {
-    var arVersion = navigator.appVersion.split("MSIE");
-    bversion = parseFloat(arVersion[1]);
-  }
-  else if(IsNetscape() || IsSafari()) {
-    bversion = parseInt(navigator.appVersion);
-    //check for Safari.  
-    if(navigator.userAgent.match('Safari')) bname = 'Safari';
-  }
-  else bversion = 0;
+    bname = navigator.appName;
+    if (IsMicrosoft()) {
+        var arVersion = navigator.appVersion.split("MSIE");
+        bversion = parseFloat(arVersion[1]);
+    }
+    else if (IsNetscape() || IsSafari()) {
+        bversion = parseInt(navigator.appVersion);
+        //check for Safari.
+        if (navigator.userAgent.match('Safari')) bname = 'Safari';
+    }
+    else bversion = 0;
 }
 
 function IsNetscape() {
-  return (bname.indexOf("Netscape")!=-1);
+    return (bname.indexOf("Netscape") != -1);
 }
 
 function IsMicrosoft() {
-  return (bname.indexOf("Microsoft")!=-1);
+    return (bname.indexOf("Microsoft") != -1);
 }
 
 function IsSafari() {
-  return (bname.indexOf("Safari")!=-1);
+    return (bname.indexOf("Safari") != -1);
 }
 
 function IsChrome() {
-  return (bname.indexOf("chrome")!=-1);
+    return (bname.indexOf("chrome") != -1);
 }
 
 function getCookie(c_name) {
-  if (document.cookie.length>0) { 
-    c_start=document.cookie.indexOf(c_name + "=");
-    if (c_start!=-1) { 
-      c_start=c_start + c_name.length+1;
-      c_end=document.cookie.indexOf(";",c_start);
-      if (c_end==-1) c_end=document.cookie.length;
-      return unescape(document.cookie.substring(c_start,c_end));
-    } 
-  }
-  return null
+    if (document.cookie.length > 0) {
+        c_start = document.cookie.indexOf(c_name + "=");
+        if (c_start != -1) {
+            c_start = c_start + c_name.length + 1;
+            c_end = document.cookie.indexOf(";", c_start);
+            if (c_end == -1) c_end = document.cookie.length;
+            return unescape(document.cookie.substring(c_start, c_end));
+        }
+    }
+    return null
 }
 
-function setCookie(c_name,value,expiredays) {
-  var exdate=new Date();
-  exdate.setDate(expiredays);
-  document.cookie=c_name+ "=" +escape(value)+
-    ((expiredays==null) ? "" : "; expires="+exdate);
+function setCookie(c_name, value, expiredays) {
+    var exdate = new Date();
+    exdate.setDate(expiredays);
+    document.cookie = c_name + "=" + escape(value) +
+        ((expiredays == null) ? "" : "; expires=" + exdate);
 }
 
 /** This function gets a variable from the URL (or the COOKIES)
- * @example: 
+ * @example:
  * // returns the username
  * var username = getQueryVariable("username");
  */
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");
-    for (var i=0;i<vars.length;i++) {
+    for (var i = 0; i < vars.length; i++) {
         var pair = vars[i].split("=");
         if (pair[0] == variable) {
             return pair[1];
         }
     }
     return getCookie(variable);
+}
+
+/***
+ * 根据传入参数获得数值
+ * @constructor
+ */
+function getUrlParam(variable) {
+
 }

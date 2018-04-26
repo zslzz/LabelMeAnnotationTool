@@ -4,8 +4,11 @@
 
 function StartupLabelMe() {
     console.time('startup');
-
     // Check browser:
+    // window.localStorage.setItem("asd", "hello my world");
+    // window.localStorage.setItem('myCat', 'Tom');
+    var cat = window.localStorage.getItem("asd");
+    console.log(cat)
     GetBrowserInfo();
 
     if (IsNetscape() || (IsMicrosoft() && (bversion >= 4.5)) || IsSafari() || IsChrome()) {
@@ -28,8 +31,9 @@ function StartupLabelMe() {
         // annotation folder or image filename.  If false is returned, the
         // function fetches a new image and sets the URL to reflect the
         // fetched image.
+        gettask()
+        getInfoFromUrl();//从url中获取信息
         if (!main_media.GetFileInfo().ParseURL()) return;
-
         if (video_mode) {
             $('#generic_buttons').remove();
             $.getScript("annotationTools/js/video.js", function () {
@@ -58,6 +62,7 @@ function StartupLabelMe() {
                 // Read the XML annotation file:
                 var anno_file = main_media.GetFileInfo().GetFullName();
                 console.log(anno_file)
+
                 anno_file = 'Annotations/' + anno_file.substr(0, anno_file.length - 4) + '.xml' + '?' + Math.random();
                 ReadXML(anno_file, LoadAnnotationSuccess, LoadAnnotation404);
                 main_media.GetFileInfo().PreFetchImage();
@@ -72,6 +77,15 @@ function StartupLabelMe() {
         $('body').remove();
         $('html').append('<body><p><img src="Icons/LabelMe.gif" /></p><br /><p>Sorry!  This page only works with Mozilla Firefox, Chrome, and Internet Explorer.  We may support other browsers in the future.</p><p><a href="http://www.mozilla.org">Download Mozilla Firefox?</a></p></body>');
     }
+}
+
+function getInfoFromUrl() {
+    var taskarray = document.URL
+    var num1 = taskarray.indexOf("[");
+    var num2 = taskarray.indexOf("]");
+    task_img_urls = taskarray.substring(num1 + 1, num2).split(",");
+
+    console.log("get imgurls")
 }
 
 function LoadNewMedia() {
